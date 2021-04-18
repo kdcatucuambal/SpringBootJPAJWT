@@ -7,24 +7,29 @@
 		<div class="row">
 			<div class="col-6 mx-auto">
 				<div class="card">
-					<div class="card-header text-center">Sign In!</div>
+					<div class="card-header text-center">
+                        <img src="https://www.designevo.com/res/templates/thumb_small/rounded-symbol-letter-a-and-c.png" alt="" class="img-fluid">
+                    </div>
+					
 					<div class="card-body">
+					 <h5 class="card-title text-center"><strong>Iniciar Sesión</strong></h5>
 						<form th:action="@{/login}" method="post">
 
 							<div class="form-group">
-								<label for="username">Username: </label> <input type="text"
-									name="username" id="username" class="form-control"
-									placeholder="UserName" autofocus required />
+								<label for="username" class="bmd-label-floating">Usuario</label>
+								<input type="text" class="form-control" autofocus required
+									id="username" name="username">
 							</div>
 							<div class="form-group">
-								<label for="password">Password: </label> <input type="password"
-									name="password" id="password" class="form-control"
-									placeholder="Password" required />
+								<label for="password" class="bmd-label-floating">Contraseña</label>
+								<input type="password" name="password" id="password"
+									class="form-control" required />
 							</div>
 
 							<div class="form-group">
-								<input type="submit" class="btn btn-primary btn-block"
-									value="Sign In" />
+								<button type="submit" class="btn btn-raised btn-info btn-block">
+									<i class="fa fa-sign-in mr-1" aria-hidden="true"></i>Iniciar
+								</button>
 							</div>
 						</form>
 					</div>

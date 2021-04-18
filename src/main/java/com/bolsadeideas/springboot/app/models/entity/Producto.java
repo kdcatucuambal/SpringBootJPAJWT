@@ -1,6 +1,8 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -48,6 +50,10 @@ public class Producto implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public BigDecimal getPrecioBigDecimal() {
+		return new BigDecimal(this.getPrecio()).setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public Double getPrecio() {

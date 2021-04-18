@@ -5,24 +5,37 @@
 <meta charset="UTF-8" />
 <title
 	th:text="'Spring Boot: MVC + Thymeleaf + Data JPA - ' + ${titulo}"></title>
+
+
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/journal/bootstrap.min.css">
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+<link rel="stylesheet"
+	href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+	integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	th:href="@{/font-awesome-4.7.0/css/font-awesome.css}" />
 <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
 </head>
 <body>
 
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Spring Boot</a>
+			<a class="navbar-brand" href="#">KDDEV</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#about"
-						th:href="@{/listar}">Cliente</a></li>
+					<li class="nav-item active"><a class="nav-link" href="#"> <i
+							class="fa fa-home mr-2" aria-hidden="true"></i>Principal
+					</a></li>
+					<li class="nav-item active"><a class="nav-link" th:href="@{/listar}"><i
+							class="fa fa-users mr-2" aria-hidden="true"></i>Clientes</a></li>
+					<li class="nav-item active"><a class="nav-link"><i
+							class="fa fa-cart-plus mr-2" aria-hidden="true"></i>Productos</a></li>
 				</ul>
 				<ul class="navbar-nav navbar-right">
 					<li sec:authorize="!isAuthenticated()"><a
@@ -62,14 +75,6 @@
 			</div>
 		</nav>
 
-		<!-- 		<div class="alert alert-success" th:if="${success != null}" -->
-		<!-- 			th:text="${success}"></div> -->
-		<!-- 		<div class="alert alert-danger" th:if="${error != null}" -->
-		<!-- 			th:text="${error}"></div> -->
-		<!-- 		<div class="alert alert-warning" th:if="${warning != null}" -->
-		<!-- 			th:text="${warning}"></div> -->
-		<!-- 		<div class="alert alert-info" th:if="${info != null}" -->
-		<!-- 			th:text="${info}"></div> -->
 
 		<div th:if="${success != null}"
 			class="alert alert-success alert-dismissible fade show" role="alert">
@@ -126,8 +131,34 @@
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Bootstrap JS -->
 		<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-		<script th:src="@{/js/popper.min.js}"></script>
+		<!-- <script th:src="@{/js/popper.min.js}"></script>
 		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/jquery-ui.min.js}"></script> -->
+
+
+		<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+			integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+			integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+			crossorigin="anonymous"></script>
+		<script>
+			$('li a').click(
+					function(e) {
+						//e.preventDefault();
+						var $this = $(this);
+						$this.closest('ul').find('li.active,a.active')
+								.removeClass('active');
+						$this.addClass('active');
+						$this.parent().addClass('active');
+
+					});
+
+			$(document).ready(function() {
+				$('body').bootstrapMaterialDesign();
+			});
+		</script>
 		<script th:src="@{/js/jquery-ui.min.js}"></script>
 	</footer>
 </body>

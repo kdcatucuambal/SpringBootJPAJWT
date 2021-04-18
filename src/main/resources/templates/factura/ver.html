@@ -15,27 +15,31 @@
 
 				<h4 class="card-title">
 					<a th:href="@{'/ver/' + ${factura.cliente.id}}"
-						class="btn btn-light btn-xs">&laquo; volver</a> <a
-						class="btn btn-danger btn-xs float-right"
+						class="btn btn-secondary btn-xs">&laquo; volver</a> <a
+						class="btn btn-danger btn-raised btn-xs float-right"
 						th:href="@{'/factura/ver/' + ${factura.id}(format=pdf)}"
-						target="_blank">Exportar PDF</a>
+						target="_blank"><i class="fa fa-file-pdf-o mr-2"
+						aria-hidden="true"></i>PDF</a>
 				</h4>
 
 				<ul class="list-group my-2">
 					<li class="list-group-item list-group-item-primary"
 						th:text="'Datos del cliente'"></li>
-					<li class="list-group-item" th:text="${factura.cliente}"></li>
-					<li class="list-group-item" th:text="${factura.cliente.email}"></li>
+					<li class="list-group-item"><strong>Cliente:</strong><span
+						th:text="${factura.cliente}"></span></li>
+					<li class="list-group-item"><strong>Email:</strong><span
+						th:text="${factura.cliente.email}"></span></li>
 				</ul>
 
 				<ul class="list-group my-2">
 					<li class="list-group-item list-group-item-success"
 						th:text="'Datos de la factura'"></li>
-					<li class="list-group-item" th:text="'Folio: ' + ${factura.id}"></li>
-					<li class="list-group-item"
-						th:text="'Descripción: ' + ${factura.descripcion}"></li>
-					<li class="list-group-item"
-						th:text="'Fecha: ' + ${factura.createAt}"></li>
+					<li class="list-group-item"><strong>ID:</strong> <span
+						th:text="${factura.id}"></span></li>
+					<li class="list-group-item"><strong>Descripción:</strong> <span
+						th:text="${factura.descripcion}"></span></li>
+					<li class="list-group-item"><strong>Fecha:</strong> <span
+						th:text="${factura.createAt}"></span></li>
 				</ul>
 				<div class="alert alert-info my-4"
 					th:if="${#lists.isEmpty(factura.items)}"
@@ -43,7 +47,7 @@
 
 				<table th:if="${not #lists.isEmpty(factura.items)}"
 					class="table table-striped table-hover table-bordered my-3">
-					<thead>
+					<thead class="thead-dark text-center">
 						<tr>
 							<th>Producto</th>
 							<th>Precio</th>
@@ -53,19 +57,23 @@
 					</thead>
 					<tbody>
 						<tr th:each="linea: ${factura.items}">
-							<td th:text="${linea.producto.nombre}"></td>
-							<td th:text="${linea.producto.precio}"></td>
-							<td th:text="${linea.cantidad}"></td>
-							<td th:text="${linea.calcularImporte()}"></td>
+							<td class="text-center align-middle"
+								th:text="${linea.producto.nombre}"></td>
+							<td class="text-center align-middle"
+								th:text="${'$ '+linea.producto.precioBigDecimal}"></td>
+							<td class="text-center align-middle"
+								th:text="${linea.cantidad + ' unidad(s)'}"></td>
+							<td class="text-center align-middle"
+								th:text="${'$ '+linea.calcularImporte()}"></td>
 						</tr>
 					</tbody>
 
 				</table>
 
-				<h5 class="float-right">
-					Gran Total <span th:text="${factura.total}"
+				<h3 class="float-right">
+					Pago total: <span th:text="'$ '+${factura.total}"
 						class="badge badge-secondary"></span>
-				</h5>
+				</h3>
 
 				<div class="card border-info mb-4" style="max-width: 20rem;">
 					<div class="card-header">Observaciones</div>

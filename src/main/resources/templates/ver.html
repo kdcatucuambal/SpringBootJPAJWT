@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
 
@@ -12,9 +13,13 @@
 			<div class="card-body">
 
 				<h4 class="card-title">
-					<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary btn-xs"
-						th:href="@{'/factura/form/' + ${cliente.id}}"
-						th:text="'crear factura'"></a>
+					<a sec:authorize="hasRole('ROLE_ADMIN')"
+						class="btn btn-primary btn-raised btn-xs"
+						th:href="@{'/factura/form/' + ${cliente.id}}"><i
+						class="fa fa-plus mr-1" aria-hidden="true"></i>Nueva Factura</a> <a
+						class="btn btn-danger btn-raised btn-xs float-right"
+						target="_blank"><i class="fa fa-file-pdf-o mr-2"
+						aria-hidden="true"></i>PDF</a>
 				</h4>
 
 				<img th:if="${#strings.length(cliente.foto) > 0}"
@@ -22,10 +27,14 @@
 					th:src="@{'/uploads/' + ${cliente.foto}}" th:alt="${cliente.foto}" />
 
 				<ul class="list-group">
-					<li class="list-group-item active" th:text="${cliente.nombre}"></li>
-					<li class="list-group-item" th:text="${cliente.apellido}"></li>
-					<li class="list-group-item" th:text="${cliente.email}"></li>
-					<li class="list-group-item" th:text="${cliente.createAt}"></li>
+					<li class="list-group-item active" th:text="'Datos de cliente'"></li>
+					<li class="list-group-item"
+						th:text="'Nombre: ' + ${cliente.nombre}"></li>
+					<li class="list-group-item"
+						th:text="'Apellido: ' + ${cliente.apellido}"></li>
+					<li class="list-group-item" th:text="'Email: ' + ${cliente.email}"></li>
+					<li class="list-group-item"
+						th:text="'Creación ' + ${cliente.createAt}"></li>
 				</ul>
 
 				<div th:if="${#lists.isEmpty(cliente.facturas)}"
@@ -35,27 +44,36 @@
 				<table th:if="${not #lists.isEmpty(cliente.facturas)}"
 					class="table table-bordered table-striped my-4">
 					<thead class="thead-inverse">
-						<tr>
-							<th>folio</th>
-							<th>descripción</th>
-							<th>fecha</th>
-							<th>total</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">ver</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+						<tr class="thead-dark text-center">
+							<th>ID</th>
+							<th>Descripción</th>
+							<th>Fecha</th>
+							<th>Total</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Ver</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="factura: ${cliente.facturas}">
-							<td th:text="${factura.id}"></td>
-							<td th:text="${factura.descripcion}"></td>
-							<td th:text="${factura.createAt}"></td>
-							<td th:text="${factura.total}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs"
-								th:href="@{'/factura/ver/' + ${factura.id}}" th:text="'detalle'"></a></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
+							<td class="text-center align-middle" th:text="${factura.id}"></td>
+							<td class="text-center align-middle"
+								th:text="${factura.descripcion}"></td>
+							<td class="text-center align-middle"
+								th:text="${factura.createAt}"></td>
+							<td class="text-center align-middle"
+								th:text="${'$' + factura.total}"></td>
+							<td class="text-center align-middle"
+								sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="btn btn-raised btn-primary"
+								th:href="@{'/factura/ver/' + ${factura.id}}" title="Ver detalle"><i
+									class="fa fa-eye" aria-hidden="true"></i></a></td>
+							<td class="text-center align-middle"
+								sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="btn btn-danger btn-raised"
 								th:href="@{'/factura/eliminar/' + ${factura.id}}"
-								th:text="'eliminar'"
-								onclick="return confirm('¿Estas seguro que desea eliminar la factura?');"></a></td>
+								title="Eliminar"
+								onclick="return confirm('¿Estas seguro que desea eliminar la factura?');"><i
+									class="fa fa-trash" aria-hidden="true"></i></a></td>
 						</tr>
 					</tbody>
 

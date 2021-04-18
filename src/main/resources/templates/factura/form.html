@@ -5,7 +5,88 @@
 
 	<header th:replace="layout/layout :: header"></header>
 
+
+
+
+
 	<div class="container py-4">
+		<div class="row">
+			<div class="col-7 mx-auto">
+				<div class="card">
+					<div class="card-header h4" th:text="${titulo}"></div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a class="btn btn-secondary btn-raised btn-xs"
+								th:href="@{'/ver/' + ${factura.cliente.id}}"
+								th:text="'&laquo; volver'"></a>
+						</h4>
+
+						<form th:action="@{/factura/form/}" th:object="${factura}"
+							method="post">
+							<div class="form-group">
+								<label for="cliente-user" class="bmd-label-floating">Nombre
+									de usuario</label> <input type="text"
+									th:value="${factura.cliente.nombre} + ' ' + ${factura.cliente.apellido}"
+									class="form-control" id="cliente-user" disabled='disabled'>
+							</div>
+							<div class="form-group">
+								<label for="des-user" class="bmd-label-floating">Descripción
+									de factura</label> <input type="text" required class="form-control"
+									id="des-user" th:field="*{descripcion}"
+									th:errorclass="'form-control is-invalid'">
+								<div class="invalid-feedback"
+									th:if="${#fields.hasErrors('descripcion')}"
+									th:errors="*{descripcion}"></div>
+							</div>
+							<div class="form-group">
+								<label for="observacion" class="bmd-label-floating"
+									th:text="'Observación'"></label>
+
+								<textarea id="observacion" th:field="*{observacion}"
+									class="form-control"></textarea>
+
+							</div>
+							<div class="form-group">
+								<label for="buscar_producto" class="bmd-label-floating"
+									th:text="'Buscar producto'"></label> <input type="text"
+									name="buscar_producto" id="buscar_producto"
+									class="form-control" />
+							</div>
+
+							<table th:replace="factura/plantilla-items :: itemsFactura"></table>
+
+							<table id="cargarItemProductos"
+								class="table table-sm table-striped table-hover">
+								<thead class="thead-dark text-center">
+									<tr>
+										<th class="text-center">Nombre</th>
+										<th class="text-center">Precio</th>
+										<th class="text-center">Cantidad</th>
+										<th class="text-center">Total</th>
+										<th class="text-center">Eliminar</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+							<h3 class="text-right">
+								<strong>Total a pagar: </strong><span
+									class="badge badge-secondary" id="gran_total"> $0.00 </span>
+							</h3>
+							<div class="d-flex justify-content-end">
+								<input type="submit" th:value="${titulo}"
+									class="btn btn-primary btn-raised" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<!-- 
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
@@ -32,8 +113,11 @@
 						<label for="descripcion" class="col-sm-2 col-form-label"
 							th:text="'Descripción'"></label>
 						<div class="col-sm-6">
-							<input type="text" th:field="*{descripcion}" class="form-control" th:errorclass="'form-control is-invalid'" />
-							<div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+							<input type="text" th:field="*{descripcion}" class="form-control"
+								th:errorclass="'form-control is-invalid'" />
+							<div class="invalid-feedback"
+								th:if="${#fields.hasErrors('descripcion')}"
+								th:errors="*{descripcion}"></div>
 						</div>
 					</div>
 
@@ -70,7 +154,9 @@
 						<tbody>
 						</tbody>
 					</table>
-					<h5>Total <span class="badge badge-secondary" id="gran_total">0</span></h5>
+					<h5>
+						Total <span class="badge badge-secondary" id="gran_total">0</span>
+					</h5>
 
 					<div class="form-group row">
 						<div class="col-sm-6">
@@ -82,7 +168,7 @@
 
 
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 	<footer th:replace="layout/layout :: footer"></footer>

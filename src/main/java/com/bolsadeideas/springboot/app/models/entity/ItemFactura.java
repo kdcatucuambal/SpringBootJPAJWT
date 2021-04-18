@@ -1,6 +1,8 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +27,7 @@ public class ItemFactura implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "producto_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Producto producto;
 
 	public Long getId() {
@@ -44,8 +46,12 @@ public class ItemFactura implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public Double calcularImporte() {
-		return cantidad.doubleValue() * producto.getPrecio();
+	public BigDecimal calcularImporte() {
+
+		double v = cantidad.doubleValue() * producto.getPrecio();
+		BigDecimal bd = new BigDecimal(v).setScale(2, RoundingMode.HALF_UP);
+		
+		return bd;
 	}
 
 	public Producto getProducto() {
@@ -55,7 +61,7 @@ public class ItemFactura implements Serializable {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-	
+
 	private static final long serialVersionUID = 1L;
 
 }
