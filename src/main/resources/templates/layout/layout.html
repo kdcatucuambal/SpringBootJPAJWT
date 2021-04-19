@@ -29,11 +29,12 @@
 			</button>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#"> <i
-							class="fa fa-home mr-2" aria-hidden="true"></i>Principal
+					<li class="nav-item active"><a class="nav-link" href="#">
+							<i class="fa fa-home mr-2" aria-hidden="true"></i>Principal
 					</a></li>
-					<li class="nav-item active"><a class="nav-link" th:href="@{/listar}"><i
-							class="fa fa-users mr-2" aria-hidden="true"></i>Clientes</a></li>
+					<li class="nav-item active"><a class="nav-link"
+						th:href="@{/listar}"><i class="fa fa-users mr-2"
+							aria-hidden="true"></i>Clientes</a></li>
 					<li class="nav-item active"><a class="nav-link"><i
 							class="fa fa-cart-plus mr-2" aria-hidden="true"></i>Productos</a></li>
 				</ul>
@@ -54,24 +55,7 @@
 						</div></li>
 				</ul>
 
-				<ul class="navbar-nav navbar-right mx-4">
-					<li class="nav-item mx-1"><a class="btn btn-outline-success"
-						th:href="@{/locale(lang=es_ES)}">ES</a></li>
-					<li class="nav-item mx-1"><a class="btn btn-outline-success"
-						th:href="@{/locale(lang=en_US)}">EN</a></li>
-					<li class="nav-item dropdown show"><a
-						class="btn btn-outline-primary dropdown-toggle" href="#"
-						role="button" id="dropdownLanguage" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <span
-							th:text="#{text.locale.language}"></span>
-					</a>
 
-						<div class="dropdown-menu mx-2" aria-labelledby="dropdownMenuLink">
-							<a class="dropdown-item" th:href="@{/locale(lang=es_ES)}"
-								th:text="#{text.locale.es}">ES</a> <a class="dropdown-item"
-								th:href="@{/locale(lang=en_US)}" th:text="#{text.locale.en}">EN</a>
-						</div></li>
-				</ul>
 			</div>
 		</nav>
 
