@@ -35,7 +35,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	
 		String header = request.getHeader(JWTServiceImpl.HEADER_STRING);
 
-		logger.info("HEADER: " + header);
+		
 		if (!requiresAuthentication(header)) {
 			chain.doFilter(request, response);
 			return;

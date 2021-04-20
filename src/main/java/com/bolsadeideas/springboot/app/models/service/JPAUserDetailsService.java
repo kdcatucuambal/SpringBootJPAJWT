@@ -37,6 +37,9 @@ public class JPAUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("Username " + username + " do not exist in the system");
 		}
 
+		logger.info("Username: " + user.getUsername());
+		logger.info("Roles: " + user.getRoles().size());
+
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 		for (Role role : user.getRoles()) {
